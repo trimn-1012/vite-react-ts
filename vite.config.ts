@@ -4,9 +4,9 @@ import eslint from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), eslint()],
-	server: {
-		port: 9000, // setting port
-		strictPort: true, // exit if port is already in use
-	},
+  plugins: [react(), eslint()],
+  server: {
+    port: 9000, // setting port
+    strictPort: true, // exit if port is already in use
+  },
 });
