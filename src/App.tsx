@@ -1,33 +1,26 @@
-import { useState } from 'react';
+import useSWR from 'swr';
 
-import reactLogo from './assets/react.svg';
 import './App.css';
+import { IUsersResponse } from './apis/getUsers/types';
+import { fetchUsers, keyUsers } from './apis/getUsers';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { data, mutate } = useSWR<IUsersResponse>(keyUsers, fetchUsers, {
+    revalidateOnMount: false,
+    revalidateOnFocus: false,
+  });
+
+  const getUsers = async () => {
+    await mutate();
+  };
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount(prevCount => prevCount + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button onClick={getUsers}>Get users</button>
+        {data && data.users.map(user => <p key={user.id}>{user.lastName}</p>)}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   );
 }

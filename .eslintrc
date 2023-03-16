@@ -80,6 +80,14 @@
         }
       }
     ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": {
+          "attributes": false
+        }
+      }
+    ],
     "react-hooks/exhaustive-deps": "off",
     "object-shorthand": "error",
     "no-console": "warn"
