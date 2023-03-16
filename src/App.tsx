@@ -1,28 +1,21 @@
 import useSWR from 'swr';
+import { useDispatch } from 'react-redux';
 
-import './App.css';
+import RouteController from './routes';
 import { IUsersResponse } from './apis/getUsers/types';
 import { fetchUsers, keyUsers } from './apis/getUsers';
+import { updateUsers } from './globalSlice';
 
 function App() {
-  const { data, mutate } = useSWR<IUsersResponse>(keyUsers, fetchUsers, {
-    revalidateOnMount: false,
+  const dispatch = useDispatch();
+  useSWR<IUsersResponse>(keyUsers, fetchUsers, {
     revalidateOnFocus: false,
+    onSuccess: data => {
+      dispatch(updateUsers(data.users));
+    },
   });
 
-  const getUsers = async () => {
-    await mutate();
-  };
-
-  return (
-    <div className="App">
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={getUsers}>Get users</button>
-        {data && data.users.map(user => <p key={user.id}>{user.lastName}</p>)}
-      </div>
-    </div>
-  );
+  return <RouteController />;
 }
 
 export default App;

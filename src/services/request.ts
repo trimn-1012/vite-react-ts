@@ -1,11 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 
 import axios from './appAxios';
-
-type TResponse<T = unknown> = {
-  status: number;
-  data: T;
-};
+import { TResponse } from './types';
 
 const request = async <T>(config: AxiosRequestConfig) => {
   try {
