@@ -1,7 +1,7 @@
 type TRoutes = {
   path: string;
   pathWithParams?: string;
-  build: (...args: unknown[]) => string;
+  build: (...args: any[]) => string;
 };
 
 const url = {
@@ -23,7 +23,8 @@ const routes: Routes = {
   },
   users: {
     path: `${url.users}`,
-    build: () => `${url.users}`,
+    pathWithParams: `${url.users}/:id`,
+    build: (id?: number) => `${url.users}${id ? `/${id}` : ''}`,
   },
 };
 

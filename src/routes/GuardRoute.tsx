@@ -4,17 +4,16 @@ import { useLocation, Outlet, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
 import { fetchUser, keyUser } from '../apis/getUser';
-import { IUserResponse } from '../apis/getUser/types';
 import { isAuthenticatedSelector, updateUser } from '../pages/Login/slice';
 import tokenStorage from '../utility/tokenStorage';
 import routes from './paths';
 
-const RequireAuth = () => {
+const GuardRoute = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const token = tokenStorage.get();
   const isAuthenticated = useSelector(isAuthenticatedSelector);
-  const dispatch = useDispatch();
 
   const navigateToLogin = () => {
     navigate(routes.login.build(), {
@@ -25,7 +24,7 @@ const RequireAuth = () => {
     });
   };
 
-  useSWR<IUserResponse>(token ? `${keyUser}/${token}` : null, fetchUser, {
+  useSWR(token ? `${keyUser}/${token}` : null, fetchUser, {
     revalidateOnFocus: false,
     onSuccess: data => {
       dispatch(updateUser(data));
@@ -46,9 +45,9 @@ const RequireAuth = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!isAuthenticated) return <Outlet />;
+  if (!isAuthenticated) return null;
 
   return <Outlet />;
 };
 
-export default RequireAuth;
+export default GuardRoute;
