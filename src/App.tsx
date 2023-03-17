@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import RouteController from './routes';
 import { IUsersResponse } from './apis/getUsers/types';
 import { fetchUsers, keyUsers } from './apis/getUsers';
-import { updateUsers } from './globalSlice';
+import { updateUsers } from './appSlice';
 
 function App() {
   const dispatch = useDispatch();

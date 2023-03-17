@@ -3,10 +3,10 @@ import request from '../../services/request';
 
 const keyUser = '/user';
 
-async function fetchUser(id: number) {
+async function fetchUser(url: string) {
   const res = await request<IUserResponse>({
     method: 'GET',
-    url: `/users/${id}`,
+    url,
   });
 
   return res.data;

@@ -1,9 +1,9 @@
-import { ILoginResponse, LoginParams } from './types';
+import { ILoginResponse, TLoginParams } from './types';
 import request from '../../services/request';
 
 const keyLogin = '/auth/login';
 
-async function login(url: string, { arg }: { arg: LoginParams }) {
+async function login(url: string, { arg }: { arg: TLoginParams }) {
   const res = await request<ILoginResponse>({
     method: 'POST',
     url,

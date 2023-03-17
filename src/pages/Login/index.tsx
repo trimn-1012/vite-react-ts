@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Key } from 'swr';
 import useSWRMutation from 'swr/mutation';
 
-import { keyLogin, login } from '../apis/login';
-import { ILoginResponse, LoginParams } from '../apis/login/types';
-import routes from '../routes/paths';
-import { ErrorResponse } from '../services/types';
-import tokenStorage from '../utility/tokenStorage';
+import { keyLogin, login } from '../../apis/login';
+import { ILoginResponse, TLoginParams } from '../../apis/login/types';
+import routes from '../../routes/paths';
+import { ErrorResponse } from '../../services/types';
+import tokenStorage from '../../utility/tokenStorage';
 
 type FormValues = {
   username: string;
@@ -28,14 +28,14 @@ const Login = () => {
     ILoginResponse,
     ErrorResponse,
     Key,
-    LoginParams
+    TLoginParams
   >(keyLogin, login, {
     onSuccess: data => {
-      tokenStorage.set(data.token);
+      tokenStorage.set(data.id.toString());
       navigate(routes.users.build());
     },
     onError: error => {
-      console.log(error.response.data.message);
+      alert(error.response.data.message);
     },
   });
 

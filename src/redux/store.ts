@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import globalReducer from '../globalSlice';
+import appReducer from '../appSlice';
+import userReducer from '../pages/Login/slice';
 
 export default configureStore({
   reducer: {
-    global: globalReducer,
+    app: appReducer,
+    login: userReducer,
   },
 });

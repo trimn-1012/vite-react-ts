@@ -1,5 +1,6 @@
 type TRoutes = {
   path: string;
+  pathWithParams?: string;
   build: (...args: unknown[]) => string;
 };
 

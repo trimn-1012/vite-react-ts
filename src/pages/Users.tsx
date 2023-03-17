@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { usersSelector } from '../globalSlice';
+import { usersSelector } from '../appSlice';
 
 const Users = () => {
   const users = useSelector(usersSelector);

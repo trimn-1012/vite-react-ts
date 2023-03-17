@@ -1,12 +1,12 @@
 import type { Merge } from 'type-fest';
 
-import { IUser } from '../getUsers/types';
+import { IUser } from '../getUser/types';
 
 interface IToken {
   token: string;
 }
 
-export type LoginParams = {
+export type TLoginParams = {
   username: string;
   password: string;
 };
