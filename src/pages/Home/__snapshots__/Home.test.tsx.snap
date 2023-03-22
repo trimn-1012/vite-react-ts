@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`pages/Home > snapshot > should render and match the snapshot 1`] = `
+<div>
+  Home Page
+  <div>
+    Home Template
+  </div>
+</div>
+`;

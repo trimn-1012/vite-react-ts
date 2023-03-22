@@ -69,6 +69,7 @@
         "newlines-between": "always"
       }
     ],
+    "import/no-extraneous-dependencies": "off",
     "react/self-closing-comp": "warn",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-types": [

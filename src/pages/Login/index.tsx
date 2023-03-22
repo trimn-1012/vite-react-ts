@@ -7,7 +7,7 @@ import { keyLogin, login } from '@/apis/login';
 import { ILoginResponse, TLoginParams } from '@/apis/login/types';
 import routes from '@/routes/paths';
 import { ErrorResponse } from '@/services/types';
-import tokenStorage from '@/utility/tokenStorage';
+import tokenStorage from '@/utils/tokenStorage';
 
 type FormValues = {
   username: string;
@@ -51,7 +51,14 @@ const Login = () => {
         <Controller
           control={control}
           name="username"
-          render={({ field }) => <input id="username" type="text" {...field} />}
+          render={({ field }) => (
+            <input
+              data-testid="username"
+              id="username"
+              type="text"
+              {...field}
+            />
+          )}
         />
       </div>
       <div>
@@ -60,11 +67,18 @@ const Login = () => {
           control={control}
           name="password"
           render={({ field }) => (
-            <input id="password" type="password" {...field} />
+            <input
+              data-testid="password"
+              id="password"
+              type="password"
+              {...field}
+            />
           )}
         />
       </div>
-      <button disabled={isMutating}>Login</button>
+      <button data-testid="loginButton" disabled={isMutating}>
+        Login
+      </button>
     </form>
   );
 };

@@ -1,16 +1,12 @@
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { isAuthenticatedSelector } from '@/pages/Login/slice';
 import routes from '@/routes/paths';
-import tokenStorage from '@/utility/tokenStorage';
+import tokenStorage from '@/utils/tokenStorage';
 
-type Props = {
-  children?: ReactNode;
-};
-
-const Layout: FC<Props> = ({ children }) => {
+const Layout: FC<PropsWithChildren> = ({ children }) => {
   const isAuthenticated =
     useSelector(isAuthenticatedSelector) || !!tokenStorage.get();
 

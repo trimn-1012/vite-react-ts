@@ -5,7 +5,7 @@ import useSWR from 'swr';
 
 import { fetchUser, keyUser } from '@/apis/getUser';
 import { isAuthenticatedSelector, updateUser } from '@/pages/Login/slice';
-import tokenStorage from '@/utility/tokenStorage';
+import tokenStorage from '@/utils/tokenStorage';
 
 import routes from './paths';
 

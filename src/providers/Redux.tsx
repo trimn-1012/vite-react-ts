@@ -1,13 +1,9 @@
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 
 import store from '@/redux/store';
 
-type Props = {
-  children?: ReactNode;
-};
-
-const ReduxProvider: FC<Props> = ({ children, ...rest }) => (
+const ReduxProvider: FC<PropsWithChildren> = ({ children, ...rest }) => (
   <Provider store={store} {...rest}>
     {children}
   </Provider>

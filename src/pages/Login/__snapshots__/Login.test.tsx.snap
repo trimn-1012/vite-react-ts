@@ -1,0 +1,40 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`pages/Login > index.tsx > snapshot > should render and match the snapshot 1`] = `
+<form>
+  Login
+  <div>
+    <label
+      for="username"
+    >
+      Username
+    </label>
+    <input
+      data-testid="username"
+      id="username"
+      name="username"
+      type="text"
+      value=""
+    />
+  </div>
+  <div>
+    <label
+      for="password"
+    >
+      Password
+    </label>
+    <input
+      data-testid="password"
+      id="password"
+      name="password"
+      type="password"
+      value=""
+    />
+  </div>
+  <button
+    data-testid="loginButton"
+  >
+    Login
+  </button>
+</form>
+`;

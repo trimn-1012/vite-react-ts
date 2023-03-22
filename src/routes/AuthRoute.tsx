@@ -1,6 +1,6 @@
 import { useLocation, Outlet, Navigate } from 'react-router-dom';
 
-import tokenStorage from '@/utility/tokenStorage';
+import tokenStorage from '@/utils/tokenStorage';
 
 import routes from './paths';
 

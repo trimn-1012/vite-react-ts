@@ -7,7 +7,7 @@ interface ISliceState {
   user: IUser | null;
 }
 
-const initialState: ISliceState = {
+export const initialState: ISliceState = {
   user: null,
 };
 const slice = createSlice({
@@ -24,8 +24,9 @@ const { reducer, actions } = slice;
 
 export const { updateUser } = actions;
 
-export const userSelector = (state: IRootState) => state.login.user;
-export const isAuthenticatedSelector = (state: IRootState) =>
+export const userSelector = (state: Pick<IRootState, 'login'>) =>
+  state.login.user;
+export const isAuthenticatedSelector = (state: Pick<IRootState, 'login'>) =>
   !!state.login.user;
 
 export default reducer;
