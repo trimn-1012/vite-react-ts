@@ -8,12 +8,17 @@ import Layout from '../templates/Layout';
 import routes from './paths';
 import GuardRoute from './GuardRoute';
 import AuthRoute from './AuthRoute';
+import ErrorBoundary from '../organisms/ErrorBoundary';
 
 const RouteController = () => {
   return (
-    <Layout>
-      <Routes>
-        <Route path={routes.home.path} element={<Home />} />
+    <Routes>
+      <Route
+        path={routes.home.path}
+        element={<Layout />}
+        errorElement={<ErrorBoundary />}
+      >
+        <Route index element={<Home />} />
         <Route element={<AuthRoute />}>
           <Route path={routes.login.path} element={<Login />} />
         </Route>
@@ -24,8 +29,8 @@ const RouteController = () => {
           </Route>
         </Route>
         <Route path="*" element={<div>Not found</div>} />
-      </Routes>
-    </Layout>
+      </Route>
+    </Routes>
   );
 };
 
