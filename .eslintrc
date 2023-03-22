@@ -36,6 +36,7 @@
     }
   },
   "rules": {
+    "no-undef": "off",
     "linebreak-style": "off",
     "prettier/prettier": [
       "error",
