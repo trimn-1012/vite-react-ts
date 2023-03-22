@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IUser } from '../../apis/getUser/types';
-import { IRootState } from '../../redux/types';
+import { IUser } from '@/apis/getUser/types';
+import { IRootState } from '@/redux/types';
 
 interface ISliceState {
   user: IUser | null;

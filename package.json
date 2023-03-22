@@ -25,6 +25,7 @@
     "vite-plugin-eslint": "^1.8.1"
   },
   "devDependencies": {
+    "@types/node": "^18.15.5",
     "@types/qs": "^6.9.7",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",

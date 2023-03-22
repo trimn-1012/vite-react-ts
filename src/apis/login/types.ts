@@ -1,6 +1,6 @@
 import type { Merge } from 'type-fest';
 
-import { IUser } from '../getUser/types';
+import { IUser } from '@/apis/getUser/types';
 
 interface IToken {
   token: string;

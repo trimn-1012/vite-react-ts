@@ -1,6 +1,7 @@
 import { useLocation, Outlet, Navigate } from 'react-router-dom';
 
-import tokenStorage from '../utility/tokenStorage';
+import tokenStorage from '@/utility/tokenStorage';
+
 import routes from './paths';
 
 const AuthRoute = () => {

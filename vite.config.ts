@@ -9,4 +9,9 @@ export default defineConfig({
     port: 9000, // setting port
     strictPort: true, // exit if port is already in use
   },
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
 });

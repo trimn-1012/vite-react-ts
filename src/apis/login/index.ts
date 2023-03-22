@@ -1,5 +1,6 @@
+import request from '@/services/request';
+
 import { ILoginResponse, TLoginParams } from './types';
-import request from '../../services/request';
 
 const keyLogin = '/auth/login';
 

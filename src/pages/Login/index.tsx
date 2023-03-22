@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Key } from 'swr';
 import useSWRMutation from 'swr/mutation';
 
-import { keyLogin, login } from '../../apis/login';
-import { ILoginResponse, TLoginParams } from '../../apis/login/types';
-import routes from '../../routes/paths';
-import { ErrorResponse } from '../../services/types';
-import tokenStorage from '../../utility/tokenStorage';
+import { keyLogin, login } from '@/apis/login';
+import { ILoginResponse, TLoginParams } from '@/apis/login/types';
+import routes from '@/routes/paths';
+import { ErrorResponse } from '@/services/types';
+import tokenStorage from '@/utility/tokenStorage';
 
 type FormValues = {
   username: string;
