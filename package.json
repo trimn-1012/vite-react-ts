@@ -10,7 +10,8 @@
     "coverage": "vitest run --coverage",
     "preview": "vite preview",
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x} --cache --max-warnings=0",
-    "lint:fix": "eslint src/**/*.ts{,x} --fix"
+    "lint:fix": "eslint src/**/*.ts{,x} --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.0.0",
@@ -57,7 +58,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "jsdom": "^21.1.1",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.4",
