@@ -1,4 +1,4 @@
 {
-  "src/**/*.{ts,tsx,js,jsx}": ["eslint --fix --cache"],
+  "src/**/*.{ts,tsx,js,jsx}": ["yarn lint"],
   "*.{md,json,html,css}": ["prettier --write"]
 }
