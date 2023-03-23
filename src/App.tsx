@@ -1,9 +1,9 @@
 import useSWR from 'swr';
 import { useDispatch } from 'react-redux';
 
-import RouteController from './routes';
-import { fetchUsers, keyUsers } from './apis/getUsers';
-import { updateUsers } from './appSlice';
+import { fetchUsers, keyUsers } from '@/apis/getUsers';
+import RouteController from '@/routes';
+import { updateUsers } from '@/appSlice';
 
 function App() {
   const dispatch = useDispatch();

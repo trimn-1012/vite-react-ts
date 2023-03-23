@@ -8,8 +8,10 @@ const request = async <T>(config: AxiosRequestConfig) => {
     const { status, data }: TResponse<T> = await axios(config);
 
     return { status, data };
-  } catch (error) {
-    return Promise.reject(error);
+  } catch (error: any) {
+    const { status, data } = error.response ?? {};
+
+    return Promise.reject({ status, data });
   }
 };
 

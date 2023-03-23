@@ -1,5 +1,6 @@
+import request from '@/services/request';
+
 import { IUsersResponse } from './types';
-import request from '../../services/request';
 
 const keyUsers = '/users';
 

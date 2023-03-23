@@ -11,7 +11,7 @@ export interface IUser {
   phone: string;
   username: string;
   password: string;
-  birthDate: Date;
+  birthDate: string;
   image: string;
   bloodGroup: string;
 }

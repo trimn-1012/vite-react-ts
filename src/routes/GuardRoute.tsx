@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, Outlet, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
-import { fetchUser, keyUser } from '../apis/getUser';
-import { isAuthenticatedSelector, updateUser } from '../pages/Login/slice';
-import tokenStorage from '../utility/tokenStorage';
+import { fetchUser, keyUser } from '@/apis/getUser';
+import { isAuthenticatedSelector, updateUser } from '@/pages/Login/slice';
+import tokenStorage from '@/utils/tokenStorage';
+
 import routes from './paths';
 
 const GuardRoute = () => {

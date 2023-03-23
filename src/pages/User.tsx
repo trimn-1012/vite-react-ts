@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import useSWR from 'swr';
 
-import { fetchUser, keyUser } from '../apis/getUser';
+import { fetchUser, keyUser } from '@/apis/getUser';
 
 const User = () => {
   const navigate = useNavigate();

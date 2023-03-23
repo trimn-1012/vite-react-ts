@@ -69,8 +69,11 @@
         "newlines-between": "always"
       }
     ],
+    "import/no-extraneous-dependencies": "off",
     "react/self-closing-comp": "warn",
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/ban-types": [
       "error",
       {

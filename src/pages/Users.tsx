@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { usersSelector } from '../appSlice';
-import routes from '../routes/paths';
+import { usersSelector } from '@/appSlice';
+import routes from '@/routes/paths';
 
 const Users = () => {
   const users = useSelector(usersSelector);
