@@ -5,34 +5,35 @@ import { SWRConfig } from 'swr';
 
 import ReduxProvider from '@/providers/Redux';
 
+const ReduxWrapper: FC<PropsWithChildren> = ({ children }) => (
+  <ReduxProvider>{children}</ReduxProvider>
+);
+
 export function renderWithReduxProvider(
   ui: ReactElement,
   renderOptions: RenderOptions = {},
 ) {
-  const Wrapper: FC<PropsWithChildren> = ({ children }) => (
-    <ReduxProvider>{children}</ReduxProvider>
-  );
-
-  return render(ui, { wrapper: Wrapper, ...renderOptions });
+  return render(ui, { wrapper: ReduxWrapper, ...renderOptions });
 }
+
+export const SWRWrapper: FC<PropsWithChildren> = ({ children }) => (
+  <SWRConfig
+    value={{
+      errorRetryInterval: 3000,
+      errorRetryCount: 3,
+      dedupingInterval: 0,
+      provider: () => new Map(),
+    }}
+  >
+    {children}
+  </SWRConfig>
+);
 
 export function renderWithSWRConfig(
   ui: ReactElement,
   renderOptions: RenderOptions = {},
 ) {
-  const Wrapper: FC<PropsWithChildren> = ({ children }) => (
-    <SWRConfig
-      value={{
-        errorRetryInterval: 3000,
-        errorRetryCount: 3,
-        provider: () => new Map(),
-      }}
-    >
-      {children}
-    </SWRConfig>
-  );
-
-  return render(ui, { wrapper: Wrapper, ...renderOptions });
+  return render(ui, { wrapper: SWRWrapper, ...renderOptions });
 }
 
 export function renderWithRouter(
@@ -51,6 +52,20 @@ export function renderWithRouter(
   return render(ui, { wrapper: Wrapper, ...renderOptions });
 }
 
+export const AllProvidersWrapper: FC<PropsWithChildren> = ({ children }) => (
+  <ReduxProvider>
+    <SWRConfig
+      value={{
+        errorRetryInterval: 3000,
+        errorRetryCount: 3,
+        provider: () => new Map(),
+      }}
+    >
+      {children}
+    </SWRConfig>
+  </ReduxProvider>
+);
+
 export function renderWithAllProviders(
   ui: React.ReactElement,
   {
@@ -61,17 +76,9 @@ export function renderWithAllProviders(
   } & RenderOptions = {},
 ) {
   const Wrapper: FC<PropsWithChildren> = ({ children }) => (
-    <ReduxProvider>
-      <SWRConfig
-        value={{
-          errorRetryInterval: 3000,
-          errorRetryCount: 3,
-          provider: () => new Map(),
-        }}
-      >
-        <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
-      </SWRConfig>
-    </ReduxProvider>
+    <AllProvidersWrapper>
+      <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
+    </AllProvidersWrapper>
   );
 
   return render(ui, { wrapper: Wrapper, ...renderOptions });

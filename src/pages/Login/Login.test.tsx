@@ -1,10 +1,14 @@
 import { configureStore, Store } from '@reduxjs/toolkit';
 import { fireEvent, waitFor } from '@testing-library/react';
+import { Mock, vi } from 'vitest';
+import MockAdapter from 'axios-mock-adapter';
+import userEvent from '@testing-library/user-event';
 
 import { IUser } from '@/apis/getUser/types';
 import { IRootState } from '@/redux/types';
 import { renderWithAllProviders } from '@/utils/testUtils';
-import routes from '@/routes/paths';
+import appAxios from '@/services/appAxios';
+import { keyLogin } from '@/apis/login';
 
 import Login from './index';
 import reducer, {
@@ -16,20 +20,20 @@ import reducer, {
 
 let store: Store<Pick<IRootState, 'login'>>;
 
-const exampleUser: IUser = {
+const mockData: IUser = {
   id: 1,
-  firstName: 'firstName',
-  lastName: 'lastName',
-  maidenName: 'maidenName',
-  age: 21,
+  firstName: 'Terry',
+  lastName: 'Medhurst',
+  maidenName: 'Smitham',
+  age: 50,
   gender: 'male',
-  email: 'email@example.com',
-  phone: '0123456789',
-  username: 'username',
-  password: 'password',
-  birthDate: '1/1/2000',
-  image: 'image',
-  bloodGroup: 'A',
+  email: 'atuny0@sohu.com',
+  phone: '+63 791 675 8914',
+  username: 'atuny0',
+  password: '9uQFF1Lh',
+  birthDate: '2000-12-25',
+  image: 'https://robohash.org/hicveldicta.png',
+  bloodGroup: 'A−',
 };
 
 describe('pages/Login', () => {
@@ -49,14 +53,14 @@ describe('pages/Login', () => {
     });
 
     it('should handle updateUser action', () => {
-      store.dispatch(updateUser(exampleUser));
+      store.dispatch(updateUser(mockData));
       const state = store.getState();
 
-      expect(userSelector(state)).toEqual(exampleUser);
+      expect(userSelector(state)).toEqual(mockData);
     });
 
     it('should isAuthenticated return true if user exist', () => {
-      store.dispatch(updateUser(exampleUser));
+      store.dispatch(updateUser(mockData));
       const state = store.getState();
 
       expect(isAuthenticatedSelector(state)).toEqual(true);
@@ -78,6 +82,15 @@ describe('pages/Login', () => {
       });
     });
     describe('function', () => {
+      let mockedAlert: Mock<any, any>;
+      let mockAxios: MockAdapter;
+
+      beforeEach(() => {
+        mockAxios = new MockAdapter(appAxios);
+        mockedAlert = vi.fn();
+        global.alert = mockedAlert;
+      });
+
       it('renders login form with username, password input and login button', () => {
         const { getByTestId } = renderWithAllProviders(<Login />);
         const usernameElement = getByTestId('username');
@@ -101,60 +114,32 @@ describe('pages/Login', () => {
       });
 
       it('calls login API with correct username and password', async () => {
-        const mockLoginMutation = jest.fn();
-        jest.mock('swr/mutation', () => () => ({
-          trigger: mockLoginMutation,
-          isMutating: false,
-        }));
-
-        const { getByTestId } = renderWithAllProviders(<Login />);
+        const user = userEvent.setup();
+        const { getByTestId, getByText } = renderWithAllProviders(<Login />);
         const usernameElement = getByTestId('username');
         const passwordElement = getByTestId('password');
         const buttonElement = getByTestId('loginButton');
-        fireEvent.change(usernameElement, { target: { value: 'username' } });
-        fireEvent.change(passwordElement, { target: { value: 'password' } });
+
+        // Click the submit button without filling the form
+        await user.click(buttonElement);
+
+        expect(getByText('username is required')).toBeInTheDocument();
+        expect(getByText('password is required')).toBeInTheDocument();
+
+        fireEvent.change(usernameElement, { target: { value: 'atuny0' } });
+        fireEvent.change(passwordElement, { target: { value: '9uQFF1Lh' } });
+
+        mockAxios
+          .onPost(keyLogin, {
+            username: 'atuny0',
+            password: '9uQFF1Lh',
+          })
+          .reply(200, mockData);
+
         fireEvent.click(buttonElement);
 
         await waitFor(() => {
-          expect(mockLoginMutation).toHaveBeenCalledWith({
-            username: 'username',
-            password: 'password',
-          });
-        });
-      });
-
-      it('redirects to Users page after successful login', async () => {
-        const mockLoginMutation = jest.fn();
-        jest.mock('swr/mutation', () => () => ({
-          trigger: mockLoginMutation,
-          isMutating: false,
-        }));
-
-        const mockTokenStorageSet = jest.fn();
-        jest.mock('@/utils/tokenStorage', () => ({
-          set: mockTokenStorageSet,
-        }));
-
-        const mockNavigate = jest.fn();
-        jest.mock('react-router-dom', () => ({
-          useNavigate: () => mockNavigate,
-        }));
-
-        mockLoginMutation.mockResolvedValueOnce({
-          id: 1,
-        });
-
-        const { getByTestId } = renderWithAllProviders(<Login />);
-        const usernameElement = getByTestId('username');
-        const passwordElement = getByTestId('password');
-        const buttonElement = getByTestId('loginButton');
-        fireEvent.change(usernameElement, { target: { value: 'username' } });
-        fireEvent.change(passwordElement, { target: { value: 'password' } });
-        fireEvent.click(buttonElement);
-
-        await waitFor(() => {
-          expect(mockTokenStorageSet).toHaveBeenCalledWith('1');
-          expect(mockNavigate).toHaveBeenCalledWith(routes.users.build());
+          expect(mockedAlert).toHaveBeenCalledWith('Login successfully');
         });
       });
     });

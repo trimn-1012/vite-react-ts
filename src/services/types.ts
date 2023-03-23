@@ -3,11 +3,9 @@ export type TResponse<T = unknown> = {
   data: T;
 };
 
-export type ErrorResponse = {
-  response: {
-    data: {
-      message: string;
-    };
-    status: number;
+export type TErrorResponse = {
+  data: {
+    message: string;
   };
+  status: number;
 };
