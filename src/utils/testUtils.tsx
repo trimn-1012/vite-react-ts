@@ -83,3 +83,5 @@ export function renderWithAllProviders(
 
   return render(ui, { wrapper: Wrapper, ...renderOptions });
 }
+
+export { default as userEvent } from '@testing-library/user-event';

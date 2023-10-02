@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StoryObj, Meta } from '@storybook/react';
 
 import HomeTemplate from '@/templates/Home';
 
@@ -6,13 +6,10 @@ export default {
   title: 'Templates/Home',
   component: HomeTemplate,
   parameters: {
-    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'fullscreen',
   },
-} as ComponentMeta<typeof HomeTemplate>;
+} as Meta<typeof HomeTemplate>;
 
-const Template: ComponentStory<typeof HomeTemplate> = args => (
-  <HomeTemplate {...args} />
-);
+type Story = StoryObj<typeof HomeTemplate>;
 
-export const Default = Template.bind({});
+export const Template: Story = {};
