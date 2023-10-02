@@ -2,11 +2,10 @@ import { configureStore, Store } from '@reduxjs/toolkit';
 import { fireEvent, waitFor } from '@testing-library/react';
 import { Mock, vi } from 'vitest';
 import MockAdapter from 'axios-mock-adapter';
-import userEvent from '@testing-library/user-event';
 
+import { userEvent, renderWithAllProviders } from '@/utils/testUtils';
 import { IUser } from '@/apis/getUser/types';
 import { IRootState } from '@/redux/types';
-import { renderWithAllProviders } from '@/utils/testUtils';
 import appAxios from '@/services/appAxios';
 import { keyLogin } from '@/apis/login';
 
