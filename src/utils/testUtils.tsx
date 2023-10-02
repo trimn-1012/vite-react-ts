@@ -3,19 +3,6 @@ import { FC, ReactElement, PropsWithChildren } from 'react';
 import { MemoryRouter, MemoryRouterProps } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import ReduxProvider from '@/providers/Redux';
-
-const ReduxWrapper: FC<PropsWithChildren> = ({ children }) => (
-  <ReduxProvider>{children}</ReduxProvider>
-);
-
-export function renderWithReduxProvider(
-  ui: ReactElement,
-  renderOptions: RenderOptions = {},
-) {
-  return render(ui, { wrapper: ReduxWrapper, ...renderOptions });
-}
-
 export const SWRWrapper: FC<PropsWithChildren> = ({ children }) => (
   <SWRConfig
     value={{
@@ -53,17 +40,15 @@ export function renderWithRouter(
 }
 
 export const AllProvidersWrapper: FC<PropsWithChildren> = ({ children }) => (
-  <ReduxProvider>
-    <SWRConfig
-      value={{
-        errorRetryInterval: 3000,
-        errorRetryCount: 3,
-        provider: () => new Map(),
-      }}
-    >
-      {children}
-    </SWRConfig>
-  </ReduxProvider>
+  <SWRConfig
+    value={{
+      errorRetryInterval: 3000,
+      errorRetryCount: 3,
+      provider: () => new Map(),
+    }}
+  >
+    {children}
+  </SWRConfig>
 );
 
 export function renderWithAllProviders(

@@ -1,23 +1,13 @@
-import { configureStore, Store } from '@reduxjs/toolkit';
 import { fireEvent, waitFor } from '@testing-library/react';
 import { Mock, vi } from 'vitest';
 import MockAdapter from 'axios-mock-adapter';
 
 import { userEvent, renderWithAllProviders } from '@/utils/testUtils';
 import { IUser } from '@/apis/getUser/types';
-import { IRootState } from '@/redux/types';
 import appAxios from '@/services/appAxios';
 import { keyLogin } from '@/apis/login';
 
 import Login from './index';
-import reducer, {
-  initialState,
-  updateUser,
-  userSelector,
-  isAuthenticatedSelector,
-} from './slice';
-
-let store: Store<Pick<IRootState, 'login'>>;
 
 const mockData: IUser = {
   id: 1,
@@ -36,42 +26,6 @@ const mockData: IUser = {
 };
 
 describe('pages/Login', () => {
-  describe('slice.ts', () => {
-    beforeEach(() => {
-      store = configureStore({
-        reducer: {
-          login: reducer,
-        },
-      });
-    });
-
-    it('should return the initial state', () => {
-      const state = store.getState();
-
-      expect(state.login).toEqual(initialState);
-    });
-
-    it('should handle updateUser action', () => {
-      store.dispatch(updateUser(mockData));
-      const state = store.getState();
-
-      expect(userSelector(state)).toEqual(mockData);
-    });
-
-    it('should isAuthenticated return true if user exist', () => {
-      store.dispatch(updateUser(mockData));
-      const state = store.getState();
-
-      expect(isAuthenticatedSelector(state)).toEqual(true);
-    });
-
-    it('should isAuthenticated return false if user null', () => {
-      const state = store.getState();
-
-      expect(isAuthenticatedSelector(state)).toEqual(false);
-    });
-  });
-
   describe('index.tsx', () => {
     describe('snapshot', () => {
       it('should render and match the snapshot', () => {

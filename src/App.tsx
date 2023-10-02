@@ -1,16 +1,16 @@
 import useSWR from 'swr';
-import { useDispatch } from 'react-redux';
 
 import { fetchUsers, keyUsers } from '@/apis/getUsers';
 import RouteController from '@/routes';
-import { updateUsers } from '@/appSlice';
+
+import { useUsersStore } from './stores/users/use-users-store';
 
 function App() {
-  const dispatch = useDispatch();
+  const { updateUsers } = useUsersStore();
   useSWR(keyUsers, fetchUsers, {
     revalidateOnFocus: false,
     onSuccess: data => {
-      dispatch(updateUsers(data.users));
+      updateUsers(data.users);
     },
   });
 

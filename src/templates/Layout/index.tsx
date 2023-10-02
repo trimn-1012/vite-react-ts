@@ -1,17 +1,15 @@
 import { FC, PropsWithChildren } from 'react';
-import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { isAuthenticatedSelector, userSelector } from '@/pages/Login/slice';
 import routes from '@/routes/paths';
 import tokenStorage from '@/utils/tokenStorage';
 import { Header } from '@/organisms/Header';
+import { useLoginStore } from '@/stores/login/use-login-store';
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   const navigate = useNavigate();
-  const user = useSelector(userSelector);
-  const isAuthenticated =
-    useSelector(isAuthenticatedSelector) || !!tokenStorage.get();
+  const { isAuthenticated, user } = useLoginStore();
+  const authenticated = isAuthenticated || !!tokenStorage.get();
 
   const logout = () => {
     tokenStorage.remove();
@@ -30,7 +28,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
           <li>
             <Link to={routes.home.build()}>Home</Link>
           </li>
-          {isAuthenticated && (
+          {authenticated && (
             <li>
               <Link to={routes.users.build()}>Users</Link>
             </li>

@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react';
 
 import {
-  renderWithReduxProvider,
   renderWithSWRConfig,
   renderWithRouter,
   renderWithAllProviders,
@@ -12,14 +11,6 @@ const text = 'Test Component';
 const TestComponent = () => <div>{text}</div>;
 
 describe('utils/testUtils', () => {
-  describe('utils/testUtils/renderWithReduxProvider', () => {
-    it('should render', () => {
-      renderWithReduxProvider(<TestComponent />);
-
-      expect(screen.getByText(text)).toBeInTheDocument();
-    });
-  });
-
   describe('utils/testUtils/renderWithSWRConfig', () => {
     it('should render', () => {
       renderWithSWRConfig(<TestComponent />);
