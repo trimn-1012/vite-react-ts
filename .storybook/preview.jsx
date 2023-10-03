@@ -1,6 +1,7 @@
-import ReduxProvider from '../src/providers/Redux';
 import { BrowserRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
+
+import 'tailwindcss/tailwind.css';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -19,12 +20,10 @@ const swrConfig = {
 
 export const decorators = [
   Story => (
-    <ReduxProvider>
-      <SWRConfig value={swrConfig}>
-        <BrowserRouter>
-          <Story />
-        </BrowserRouter>
-      </SWRConfig>
-    </ReduxProvider>
+    <SWRConfig value={swrConfig}>
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    </SWRConfig>
   ),
 ];

@@ -94,6 +94,7 @@
     ],
     "react-hooks/exhaustive-deps": "warn",
     "object-shorthand": "error",
-    "no-console": "warn"
+    "no-console": "warn",
+    "react/prop-types": [2, { "ignore": ["className"] }]
   }
 }
