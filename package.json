@@ -20,6 +20,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@hookform/resolvers": "^3.3.1",
     "@vitejs/plugin-react-swc": "^3.4.0",
     "axios": "^1.5.1",
@@ -59,6 +60,7 @@
     "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
     "@vitest/coverage-v8": "^0.34.6",
+    "autoprefixer": "^10.4.16",
     "axios-mock-adapter": "^1.22.0",
     "eslint": "^8.50.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -74,9 +76,11 @@
     "husky": "^8.0.0",
     "jsdom": "^22.1.0",
     "lint-staged": "^14.0.1",
+    "postcss": "^8.4.31",
     "prettier": "^3.0.3",
     "react-test-renderer": "^18.2.0",
     "storybook": "^7.4.5",
+    "tailwindcss": "^3.3.3",
     "type-fest": "^4.3.3",
     "typescript": "^5.2.2",
     "vitest": "^0.34.6"
