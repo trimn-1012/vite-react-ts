@@ -6,6 +6,7 @@ import Users from '@/pages/Users';
 import User from '@/pages/User';
 import Layout from '@/templates/Layout';
 import ErrorBoundary from '@/organisms/ErrorBoundary';
+import { Dashboard } from '@/pages/Dashboard';
 
 import AuthRoute from './AuthRoute';
 import GuardRoute from './GuardRoute';
@@ -28,6 +29,7 @@ const RouteController = () => {
             <Route index element={<Users />} />
             <Route path={routes.users.pathWithParams} element={<User />} />
           </Route>
+          <Route path={routes.dashboard.path} element={<Dashboard />} />
         </Route>
         <Route path="*" element={<div>Not found</div>} />
       </Routes>
