@@ -1,4 +1,6 @@
 /// <reference types="vitest" />
+import path from 'path';
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import eslint from 'vite-plugin-eslint';
@@ -17,7 +19,7 @@ export default defineConfig(env => ({
   },
   resolve: {
     alias: {
-      '@': '/src',
+      '@': path.resolve(__dirname, './src'),
     },
   },
 }));
