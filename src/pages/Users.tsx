@@ -1,11 +1,10 @@
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { usersSelector } from '@/appSlice';
 import routes from '@/routes/paths';
+import { useUsersStore } from '@/stores/users/use-users-store';
 
 const Users = () => {
-  const users = useSelector(usersSelector);
+  const { users } = useUsersStore();
   const navigate = useNavigate();
 
   if (!users) return <div>Empty</div>;

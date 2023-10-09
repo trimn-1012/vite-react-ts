@@ -1,20 +1,18 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, Outlet, useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
 import { fetchUser, keyUser } from '@/apis/getUser';
-import { isAuthenticatedSelector, updateUser } from '@/pages/Login/slice';
 import tokenStorage from '@/utils/tokenStorage';
+import { useLoginStore } from '@/stores/login/use-login-store';
 
 import routes from './paths';
 
 const GuardRoute = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const token = tokenStorage.get();
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const { isAuthenticated, updateUser } = useLoginStore();
 
   const navigateToLogin = () => {
     navigate(routes.login.build(), {
@@ -27,9 +25,7 @@ const GuardRoute = () => {
 
   useSWR(token ? `${keyUser}/${token}` : null, fetchUser, {
     revalidateOnFocus: false,
-    onSuccess: data => {
-      dispatch(updateUser(data));
-    },
+    onSuccess: updateUser,
     onError: () => {
       tokenStorage.remove();
       navigateToLogin();
