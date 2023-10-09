@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 
+import './index.css';
+
 const swrConfig: SWRConfiguration = {
   errorRetryInterval: 3000,
   errorRetryCount: 3,
